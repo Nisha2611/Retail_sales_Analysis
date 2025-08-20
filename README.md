@@ -128,13 +128,15 @@ SELECT TOP 1 FORMAT(sales_date, 'dddd') AS Day, SUM(total_sale) AS Sales
 FROM Retail_sales
 GROUP BY FORMAT(sales_date, 'dddd')
 ORDER BY Sales DESC;
+```
 
----sql
+```sql
 -- Top 5 customers by spending
 SELECT TOP 5 customer_id, SUM(total_sale) AS total_spending
 FROM retail_sales
 GROUP BY customer_id
 ORDER BY total_spending DESC;
+```
 
 
 ## 🛠️ How to Use This Project
