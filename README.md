@@ -136,7 +136,6 @@ FROM retail_sales
 GROUP BY customer_id
 ORDER BY total_spending DESC;
 
----
 
 ## 🛠️ How to Use This Project
 
