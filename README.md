@@ -158,26 +158,23 @@ Run the SQL files in the following order:
 05_insights_summary.sql
 
 
-## 📈 Business Takeaways
+> ## 📈 Business Takeaways
+> 
+> ✅ Focus marketing on 30–40 age group (especially females)  
+> ✅ Invest in top-performing categories with high margin  
+> ✅ Optimize pricing or cost for categories with high sales but low profits  
+> ✅ Re-engage high-spending customers with low margins  
+> ✅ Use time-based promotions to leverage busiest hours
 
-✅ Focus marketing on 30-40 age group (especially females)
-✅ Invest in top-performing categories with high margin
-✅ Optimize pricing or cost for categories with high sales but low profits
-✅ Re-engage high-spending customers with low margins
-✅ Use time-based promotions to leverage busiest hours
+---
 
-
-## 👩‍💻 Author
-
-**Nisha2611**
-Aspiring Data Analyst | Passionate about SQL & Data Cleaning
-LinkedIn
-🔗 www.linkedin.com/in/
-nisha-khatoon-a866b633b
-
-🔗 GitHub Profile
-https://github.com/Nisha2611
-
+> ## 👩‍💻 Author
+> 
+> **Nisha2611**  
+> Aspiring Data Analyst | Passionate about SQL & Data Cleaning  
+> 
+> 🔗 [LinkedIn](https://www.linkedin.com/in/nisha-khatoon-a866b633b)  
+> 🔗 [GitHub](https://github.com/Nisha2611)
 
 **💬 Feedback**
 
