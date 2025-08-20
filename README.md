@@ -158,7 +158,7 @@ Run the SQL files in the following order:
 05_insights_summary.sql
 
 
-📈 Business Takeaways
+## 📈 Business Takeaways
 
 ✅ Focus marketing on 30-40 age group (especially females)
 ✅ Invest in top-performing categories with high margin
@@ -167,9 +167,9 @@ Run the SQL files in the following order:
 ✅ Use time-based promotions to leverage busiest hours
 
 
-👩‍💻 Author
+## 👩‍💻 Author
 
-Nisha2611
+**Nisha2611**
 Aspiring Data Analyst | Passionate about SQL & Data Cleaning
 LinkedIn
 🔗 www.linkedin.com/in/
