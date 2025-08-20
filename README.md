@@ -138,7 +138,7 @@ ORDER BY total_spending DESC;
 
 ---
 
-🧪 How to Use This Project
+## 🛠️ How to Use This Project
 
 Clone or download the repo
 
