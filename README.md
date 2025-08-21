@@ -85,12 +85,15 @@ Indexes created to optimize performance for common query patterns:
 
 - 👥 **Unique Customers**: `COUNT(DISTINCT customer_id)`- 155
 - 🚻 **Gender Distribution**: Breakdown by `gender`
-- 💳 **Avg. Spend by Gender**: `AVG(total_sale)` grouped by `gender`
   | gender | count_of_gender |
   |--------|-----------------|
   | Female | 1017            |
   | Male   | 980             |
-
+- 💳 **Avg. Spend by Gender**: `AVG(total_sale)` grouped by `gender`
+  | Gender | Avg. Spend (₹) |
+  |--------|----------------|
+  | Male   | ₹ 455.43       |
+  | Female | ₹ 457.62       |
 - 🎂 **Age Distribution**: Count by `age`
 - 💸 **Top Age Groups by Sales**: `SUM(total_sale)` grouped by `age`
 - 🏅 **Top 5 Customers by Revenue**: `SUM(total_sale)` by `customer_id`
