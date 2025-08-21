@@ -281,7 +281,7 @@ Indexes created to optimize performance for common query patterns:
   | Clothing    | 9           | ₹ 96.00      |
   | Electronics | 136         | ₹ 955.80     |
 
-- 🎯 **Customer Segments to Prioritize**: Above-average `total_profit` segments  
+- 🎯 **Customer Segments and product category to Prioritize**: Above-average `total_profit` segments  
 
 
   | Gender | Age | Total Sale   | Total Profit | Total Profit Margin | Category    | Category Total Sale | Category Total Profit | Category Profit Margin |
@@ -296,13 +296,6 @@ Indexes created to optimize performance for common query patterns:
   | Male   | 51  | ₹ 17,515.00  | ₹ 14,752.15  | 84.23%              | Electronics | ₹ 3,13,810.00      | ₹ 2,46,647.65        | 78.60%                |
   | Male   | 22  | ₹ 16,550.00  | ₹ 13,764.25  | 83.17%              | Clothing    | ₹ 3,11,070.00      | ₹ 2,46,679.50        | 79.30%                |
   | Male   | 22  | ₹ 16,550.00  | ₹ 13,764.25  | 83.17%              | Electronics | ₹ 3,13,810.00      | ₹ 2,46,647.65        | 78.60%                |
-
-
--📉 **Low-Margin, High-Revenue Segments**: Identified via category + segment filtering
-  | category    | Total\_sale   | total\_profit\_margin |
-  | ----------- | ------------- | --------------------- |
-  | Electronics | ₹ 3,13,810.00 | 78.60%                |
-
 
 
 ## 📌 Sample Queries (Highlights)
