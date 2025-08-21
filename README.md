@@ -11,7 +11,7 @@ This project demonstrates a complete end-to-end data analysis workflow using **S
 ```
 Retail-Sales-Analysis/
 ├── data/
-│   └── retail_sales.csv              # Raw dataset (2,000 rows of retail transactions)
+│   └── retail_sales.csv              # Raw dataset (1997 rows of retail transactions)
 ├── scripts/
 │   ├── 01_create_tables.sql          # Table creation & staging setup
 │   ├── 02_data_import.sql            # Data insert with transformation
@@ -25,7 +25,7 @@ Retail-Sales-Analysis/
 
 ## 🧾 Dataset Overview
 
-- **Size**: 2,000 retail transactions  
+- **Size**: 1997 retail transactions  
 - **Source**: CSV file imported into SQL Server  
 - **Fields include**: transaction ID, customer ID, gender, age, category, quantity, unit price, COGS (cost), sale value, timestamp
 
@@ -73,19 +73,24 @@ Indexes created to optimize performance for common query patterns:
 
 ### 🧾 General Sales Overview
 
-- ✅ **Total Transactions**: `COUNT(total_sale)` confirms 2,000 sales
-- 💵 **Total Revenue**: `SUM(total_sale)`
-- 💰 **Total Profit**: `SUM(total_sale - cogs)`
-- 📊 **Average Sales/Transaction**: `AVG(total_sale)`
-- 📦 **Average Quantity/Transaction**: `AVG(quantity)`
+- ✅ **Total Transactions**: `COUNT(total_sale)` confirms 1997 sales
+- 💵 **Total Revenue**: `SUM(total_sale)`- ₹ 9,11,720.00
+- 💰 **Total Profit**: `SUM(total_sale - cogs)`- ₹ 7,21,957.30
+- 📊 **Average Sales/Transaction**: `AVG(total_sale)`- ₹ 456.54
+- 📦 **Average Quantity/Transaction**: `AVG(quantity)`- 2
 
 ---
 
 ### 👤 Customer Analysis
 
-- 👥 **Unique Customers**: `COUNT(DISTINCT customer_id)`
+- 👥 **Unique Customers**: `COUNT(DISTINCT customer_id)`- 155
 - 🚻 **Gender Distribution**: Breakdown by `gender`
 - 💳 **Avg. Spend by Gender**: `AVG(total_sale)` grouped by `gender`
+    | gender | count_of_gender |
+|--------|-----------------|
+| Female | 1017            |
+| Male   | 980             |
+
 - 🎂 **Age Distribution**: Count by `age`
 - 💸 **Top Age Groups by Sales**: `SUM(total_sale)` grouped by `age`
 - 🏅 **Top 5 Customers by Revenue**: `SUM(total_sale)` by `customer_id`
