@@ -367,13 +367,28 @@ Run the SQL files in the following order:
 05_insights_summary.sql
 
 
-> ## 📈 Business Takeaways
-> 
-> ✅ Focus marketing on 30–40 age group (especially females)  
-> ✅ Invest in top-performing categories with high margin  
-> ✅ Optimize pricing or cost for categories with high sales but low profits  
-> ✅ Re-engage high-spending customers with low margins  
-> ✅ Use time-based promotions to leverage busiest hours
+**📈 Business Takeaways**
+
+✅ Target Marketing to the 30–40 Age Group, Especially Females:
+This segment shows high spending and strong profit margins, indicating they are valuable and responsive customers.
+
+✅ Invest More in High-Margin Categories Like Beauty and Clothing:
+These categories not only generate good revenue but also maintain superior profit margins, making them ideal for promotions and inventory focus.
+
+✅ Address Pricing and Cost Optimization for Electronics:
+Electronics have high sales volume but comparatively lower profit margins. Consider negotiating better supplier costs or adjusting prices to improve profitability.
+
+✅ Focus on High-Spending Customers with Below-Average Profit Margins:
+Engage these customers through loyalty programs or targeted offers to improve their profitability, e.g., upselling higher-margin products.
+
+✅ Leverage Time-Based Promotions During Peak Sales Hours and Days:
+Sunday is the highest sales day and evening hours (around 7–9 PM) show strong sales and profits. Running time-limited offers during these windows can maximize revenue.
+
+✅ Explore Opportunities in Underperforming Segments:
+Segments with lower sales but high margins (like certain age-gender groups) could be nurtured with personalized campaigns to boost their lifetime value.
+
+✅ Monitor Monthly and Seasonal Trends to Align Inventory and Marketing:
+Adjust stock and promotions based on monthly sales and profit trends to capitalize on peak demand periods.
 
 ---
 
