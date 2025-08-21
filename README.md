@@ -367,7 +367,7 @@ Run the SQL files in the following order:
 05_insights_summary.sql
 
 
-**📈 Business Takeaways**
+## 📈 Business Takeaways
 
 ✅ Target Marketing to the 30–40 Age Group, Especially Females:
 This segment shows high spending and strong profit margins, indicating they are valuable and responsive customers.
