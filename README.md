@@ -148,7 +148,7 @@ Indexes created to optimize performance for common query patterns:
   | 37  | 32                  |
   | 51  | 59                  |
   
-- 💸 **Top Age Groups by Sales**: `SUM(total_sale)` grouped by `age`
+- 💸 **Top 10 Age Groups by Sales**: `SUM(total_sale)` grouped by `age`
   | age | Total_sales_by_age |
   |-----|--------------------|
   | 43  | ₹ 35,940.00        |
@@ -161,19 +161,7 @@ Indexes created to optimize performance for common query patterns:
   | 21  | ₹ 25,170.00        |
   | 47  | ₹ 25,010.00        |
   | 37  | ₹ 23,300.00        |
-  | 35  | ₹ 22,580.00        |
-  | 18  | ₹ 22,340.00        |
-  | 38  | ₹ 22,200.00        |
-  | 60  | ₹ 21,180.00        |
-  | 31  | ₹ 20,440.00        |
-  | 54  | ₹ 20,010.00        |
-  | 25  | ₹ 19,800.00        |
-  | 50  | ₹ 19,690.00        |
-  | 30  | ₹ 19,580.00        |
-  | 55  | ₹ 19,560.00        |
-  | 53  | ₹ 19,020.00        |
-  | 59  | ₹ 18,940.00        |
-  | 56  | ₹ 18,880.00        |
+
   
 - 🏅 **Top 5 Customers by Revenue**: `SUM(total_sale)` by `customer_id`
   | customer_id | total_spending |
@@ -185,63 +173,135 @@ Indexes created to optimize performance for common query patterns:
   | 65          | ₹ 9,320.00     |
 
 
-- ⚠️ **High-Spending, Low-Margin Customers**: High `total_sale` with below-average `profit margin`
-| customer_id | customer_total_sale | customer_profit_margin |
-|-------------|---------------------|-------------------------|
-| 71          | ₹ 12,790.00         | 76.56 %                |
-| 52          | ₹ 10,325.00         | 75.11 %                |
-| 67          | ₹ 10,225.00         | 76.95 %                |
-| 86          | ₹ 10,085.00         | 67.84 %                |
-| 65          | ₹ 9,320.00          | 76.81 %                |
-| 83          | ₹ 9,160.00          | 71.24 %                |
-| 113         | ₹ 9,085.00          | 76.90 %                |
-| 85          | ₹ 8,590.00          | 69.96 %                |
-| 110         | ₹ 8,570.00          | 75.67 %                |
-| 56          | ₹ 8,460.00          | 73.04 %                |
-| 68          | ₹ 8,005.00          | 77.16 %                |
-| 108         | ₹ 7,685.00          | 71.27 %                |
-| 81          | ₹ 7,570.00          | 76.20 %                |
-| 104         | ₹ 7,520.00          | 74.22 %                |
-| 72          | ₹ 7,485.00          | 72.24 %                |
-| 63          | ₹ 7,480.00          | 77.27 %                |
-| 60          | ₹ 7,300.00          | 74.52 %                |
-| 106         | ₹ 7,180.00          | 75.67 %                |
-| 70          | ₹ 7,040.00          | 71.22 %                |
-| 66          | ₹ 6,915.00          | 77.17 %                |
-| 114         | ₹ 6,820.00          | 69.93 %                |
-| 64          | ₹ 6,795.00          | 75.29 %                |
-| 145         | ₹ 6,045.00          | 77.08 %                |
+- **⚠️ ** Top 10High-Spending, Low-Margin Customers**: High `total_sale` with below-average `profit margin`**
+  | customer_id | customer_total_sale | customer_profit_margin |
+  |-------------|---------------------|-------------------------|
+  | 71          | ₹ 12,790.00         | 76.56 %                |
+  | 52          | ₹ 10,325.00         | 75.11 %                |
+  | 67          | ₹ 10,225.00         | 76.95 %                |
+  | 86          | ₹ 10,085.00         | 67.84 %                |
+  | 65          | ₹ 9,320.00          | 76.81 %                |
+  | 83          | ₹ 9,160.00          | 71.24 %                |
+  | 113         | ₹ 9,085.00          | 76.90 %                |
+  | 85          | ₹ 8,590.00          | 69.96 %                |
+  | 110         | ₹ 8,570.00          | 75.67 %                |
+  | 56          | ₹ 8,460.00          | 73.04 %                |
+
 
   
 ---
 
 ### 📦 Product & Category Analysis
 
-- 🔢 **Unique Categories**: `COUNT(DISTINCT category)`
+- 🔢 **Unique Categories**: `COUNT(DISTINCT category)` - 3
 - 🏆 **Best-Selling Category (Quantity)**: `SUM(quantity)` grouped by `category`
+  | category | total_quantity_sold |
+  |----------|--------------------|
+  | Clothing | 1785               |
+
 - 💸 **Top Revenue-Generating Category**: Ranked `SUM(total_sale)` by category
+  | category    | highest_revenue    |
+  |-------------|--------------------|
+  | Electronics | ₹ 3,13,810.00      |
+
 - 📈 **Avg. Price per Unit by Category**: `AVG(price_per_unit)`
+  | category    | average_price_per_unit |
+  |-------------|-----------------------|
+  | Beauty      | ₹ 184.57              |
+  | Electronics | ₹ 181.90              |
+  | Clothing    | ₹ 174.49              |
+
 - 💹 **Highest Profit Margin by Category**: Category with max `profit margin`
+  | category | total_profit_margin |
+  |----------|--------------------|
+  | Beauty   | 79.71%             |
+
 - 🚨 **High Sales, Low Margin Categories**: Above-average sales but below-average profit margins
+  | category    | Total_sale       | total_profit_margin |
+  |-------------|------------------|---------------------|
+  | Electronics | ₹ 3,13,810.00    | 78.60%              |
 
 ---
 
 ### 🕒 Time-Based Trends
 
 - 🗓️ **Monthly Sales & Profit Trends**: Grouped by `FORMAT(sales_date, 'yyyy-MM')`
+  | Month | Total Sale (2022) | Total COGS (2022) | Total Profit (2022) | Total Sale (2023) | Total COGS (2023) | Total Profit (2023) |
+  |-------|--------------------|--------------------|----------------------|--------------------|--------------------|----------------------|
+  | 01    | ₹ 22,635.00        | ₹ 3,206.70         | ₹ 19,428.30          | ₹ 23,790.00        | ₹ 3,773.75         | ₹ 20,016.25          |
+  | 02    | ₹ 16,110.00        | ₹ 2,998.20         | ₹ 13,111.80          | ₹ 25,170.00        | ₹ 3,745.55         | ₹ 21,424.45          |
+  | 03    | ₹ 24,505.00        | ₹ 3,575.25         | ₹ 20,929.75          | ₹ 20,530.00        | ₹ 3,720.65         | ₹ 16,809.35          |
+  | 04    | ₹ 28,705.00        | ₹ 5,033.90         | ₹ 23,671.10          | ₹ 21,925.00        | ₹ 3,361.45         | ₹ 18,563.55          |
+  | 05    | ₹ 24,980.00        | ₹ 3,951.80         | ₹ 21,028.20          | ₹ 27,010.00        | ₹ 4,484.75         | ₹ 22,525.25          |
+  | 06    | ₹ 20,700.00        | ₹ 3,561.05         | ₹ 17,138.95          | ₹ 24,555.00        | ₹ 4,237.60         | ₹ 20,317.40          |
+  | 07    | ₹ 22,195.00        | ₹ 3,791.70         | ₹ 18,403.30          | ₹ 35,925.00        | ₹ 5,763.30         | ₹ 30,161.70          |
+  | 08    | ₹ 21,195.00        | ₹ 3,136.70         | ₹ 18,058.30          | ₹ 28,270.00        | ₹ 5,247.40         | ₹ 23,022.60          |
+  | 09    | ₹ 61,770.00        | ₹ 14,479.60        | ₹ 47,290.40          | ₹ 67,560.00        | ₹ 15,804.20        | ₹ 51,755.80          |
+  | 10    | ₹ 68,235.00        | ₹ 18,525.65        | ₹ 49,709.35          | ₹ 57,880.00        | ₹ 15,839.45        | ₹ 42,040.55          |
+  | 11    | ₹ 68,915.00        | ₹ 15,795.75        | ₹ 53,119.25          | ₹ 57,135.00        | ₹ 12,738.80        | ₹ 44,396.20          |
+  | 12    | ₹ 72,880.00        | ₹ 17,953.10        | ₹ 54,926.90          | ₹ 69,145.00        | ₹ 15,036.40        | ₹ 54,108.60          |
+
 - 📆 **Top Weekday by Sales**: `FORMAT(sales_date, 'dddd')` with highest `SUM(total_sale)`
+  | Day of Week | Highest Sales Volume |
+  |-------------|----------------------|
+  | Sunday      | 153,800              |
+
 - ⏰ **Busiest Sales Hours**: `DATEPART(hour, sales_time)` with most sales
+  | Busiest Hour | Total Sale    |
+  |--------------|---------------|
+  | 21           | ₹ 97,650.00   |
+
 - 💸 **Most Profitable Hour**: Hour with highest `SUM(total_sale - cogs)`
+  | Sale Hour | Total Profit    |
+  |-----------|-----------------|
+  | 19        | ₹ 83,498.95     |
+
+
 - 📈 **Top Day by Profit Margin**: Day with max `(total_sale - cogs)/total_sale`
+  | Sales Day | Total Profit Margin |
+  |-----------|----------------------|
+  | Tuesday   | 80.41%               |
+
 
 ---
 
 ### 📈 Strategic Business Insights
 
 - 🧑‍🤝‍🧑 **Most Profitable Segments (Age + Gender)**: Segment with max `profit margin`
-- 🛍️ **Profitable Category + Segment Combos**: High combined `total_profit`
-- 🎯 **Customer Segments to Prioritize**: Above-average `total_profit` segments
-- 📉 **Low-Margin, High-Revenue Segments**: Identified via category + segment filtering
+  | Age | Gender | Total Sales | Total COGS | Total Profit | Total Profit Margin |
+  |-----|--------|-------------|------------|--------------|---------------------|
+  | 24  | Female | ₹ 3,500.00  | ₹ 367.25   | ₹ 3,132.75   | 89.51%              |
+
+- 🛍️ **Top 5 Profitable Category + Segment Combos**: High combined `total_profit`
+  | Category    | Customer ID | Total Profit |
+  |-------------|-------------|--------------|
+  | Beauty      | 58          | ₹ 989.05     |
+  | Clothing    | 117         | ₹ 971.00     |
+  | Clothing    | 70          | ₹ 965.40     |
+  | Clothing    | 9           | ₹ 96.00      |
+  | Electronics | 136         | ₹ 955.80     |
+
+- 🎯 **Customer Segments to Prioritize**: Above-average `total_profit` segments  
+
+
+  | Gender | Age | Total Sale   | Total Profit | Total Profit Margin | Category    | Category Total Sale | Category Total Profit | Category Profit Margin |
+  |--------|-----|--------------|--------------|---------------------|-------------|--------------------|----------------------|-----------------------|
+  | Female | 34  | ₹ 24,100.00  | ₹ 18,870.50  | 78.30%              | Clothing    | ₹ 3,11,070.00      | ₹ 2,46,679.50        | 79.30%                |
+  | Female | 34  | ₹ 24,100.00  | ₹ 18,870.50  | 78.30%              | Electronics | ₹ 3,13,810.00      | ₹ 2,46,647.65        | 78.60%                |
+  | Female | 43  | ₹ 20,520.00  | ₹ 16,369.25  | 79.77%              | Clothing    | ₹ 3,11,070.00      | ₹ 2,46,679.50        | 79.30%                |
+  | Female | 43  | ₹ 20,520.00  | ₹ 16,369.25  | 79.77%              | Electronics | ₹ 3,13,810.00      | ₹ 2,46,647.65        | 78.60%                |
+  | Female | 26  | ₹ 20,750.00  | ₹ 15,086.65  | 72.71%              | Clothing    | ₹ 3,11,070.00      | ₹ 2,46,679.50        | 79.30%                |
+  | Female | 26  | ₹ 20,750.00  | ₹ 15,086.65  | 72.71%              | Electronics | ₹ 3,13,810.00      | ₹ 2,46,647.65        | 78.60%                |
+  | Male   | 51  | ₹ 17,515.00  | ₹ 14,752.15  | 84.23%              | Clothing    | ₹ 3,11,070.00      | ₹ 2,46,679.50        | 79.30%                |
+  | Male   | 51  | ₹ 17,515.00  | ₹ 14,752.15  | 84.23%              | Electronics | ₹ 3,13,810.00      | ₹ 2,46,647.65        | 78.60%                |
+  | Male   | 22  | ₹ 16,550.00  | ₹ 13,764.25  | 83.17%              | Clothing    | ₹ 3,11,070.00      | ₹ 2,46,679.50        | 79.30%                |
+  | Male   | 22  | ₹ 16,550.00  | ₹ 13,764.25  | 83.17%              | Electronics | ₹ 3,13,810.00      | ₹ 2,46,647.65        | 78.60%                |
+
+
+-📉 **Low-Margin, High-Revenue Segments**: Identified via category + segment filtering
+  | category    | Total\_sale   | total\_profit\_margin |
+  | ----------- | ------------- | --------------------- |
+  | Electronics | ₹ 3,13,810.00 | 78.60%                |
 
 
 
