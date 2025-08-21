@@ -36,7 +36,6 @@ Retail-Sales-Analysis/
 |------------------|----------------------------------|
 | **SQL Server**   | Data transformation and querying |
 | **T-SQL (SSMS)** | Writing complex SQL logic        |
-| **Power BI**     | *(Coming soon)* Data visualization |
 | **CSV File**     | Raw data source                  |
 
 ---
@@ -126,10 +125,8 @@ Indexes created to optimize performance for common query patterns:
 
 ## 📌 Sample Queries (Highlights)
 
----sql
-
 -- 🗓️ Which day of the week has the highest profit margin?
-SELECT TOP 1
+SELECT TOP 1 
     DATENAME(weekday, sales_date) AS sales_day,
     (SUM(total_sale - cogs) * 100.0) / NULLIF(SUM(total_sale), 0) AS total_profit_margin
 FROM retail_sales
@@ -137,8 +134,8 @@ GROUP BY DATENAME(weekday, sales_date)
 ORDER BY total_profit_margin DESC;
 
 -- 💰 Top 5 customers by total spending
-SELECT TOP 5
-    customer_id,
+SELECT TOP 5 
+    customer_id, 
     SUM(total_sale) AS total_spending
 FROM retail_sales
 GROUP BY customer_id
@@ -146,30 +143,33 @@ ORDER BY total_spending DESC;
 
 -- ⚠️ Customers with high revenue but low profit margins
 WITH customerwise_margin AS (
-    SELECT customer_id,
-           SUM(total_sale) AS customer_total_sale,
-           SUM(total_sale - cogs) AS customer_total_profit,
-           (SUM(total_sale - cogs) * 100.0) / NULLIF(SUM(total_sale), 0) AS customer_profit_margin
+    SELECT 
+        customer_id,
+        SUM(total_sale) AS customer_total_sale,
+        SUM(total_sale - cogs) AS customer_total_profit,
+        (SUM(total_sale - cogs) * 100.0) / NULLIF(SUM(total_sale), 0) AS customer_profit_margin
     FROM retail_sales
     GROUP BY customer_id
 ),
 average_profit_margin AS (
-    SELECT AVG(customer_profit_margin) AS customer_avg_profit_margin FROM customerwise_margin
+    SELECT AVG(customer_profit_margin) AS customer_avg_profit_margin 
+    FROM customerwise_margin
 ),
 average_sales AS (
-    SELECT AVG(customer_total_sale) AS customer_avg_sale FROM customerwise_margin
+    SELECT AVG(customer_total_sale) AS customer_avg_sale 
+    FROM customerwise_margin
 )
-SELECT cm.customer_id,
-       cm.customer_total_sale,
-       cm.customer_profit_margin
+SELECT 
+    cm.customer_id,
+    cm.customer_total_sale,
+    cm.customer_profit_margin
 FROM customerwise_margin cm
 CROSS JOIN average_profit_margin apm
 CROSS JOIN average_sales asm
 WHERE cm.customer_total_sale > asm.customer_avg_sale
-  AND cm.customer_profit_margin < apm.customer_avg_profit_margin
+AND cm.customer_profit_margin < apm.customer_avg_profit_margin
 ORDER BY cm.customer_total_sale DESC;
 
----
 
 ## 🛠️ How to Use This Project
 
