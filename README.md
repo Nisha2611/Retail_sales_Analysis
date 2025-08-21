@@ -120,7 +120,7 @@ Indexes created to optimize performance for common query patterns:
 - 🎯 **Customer Segments to Prioritize**: Above-average `total_profit` segments
 - 📉 **Low-Margin, High-Revenue Segments**: Identified via category + segment filtering
 
-```
+
 
 ## 📌 Sample Queries (Highlights)
 ```sql
