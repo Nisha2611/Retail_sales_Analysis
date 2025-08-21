@@ -18,8 +18,9 @@ Retail-Sales-Analysis/
 │   ├── 03_indexing.sql               # Indexes for performance tuning
 │   ├── 04_data_exploration.sql       # Exploratory & business queries
 │   ├── 05_insights_summary.sql       # Strategic business insights
-│   └── 06_full_analysis.sql          # Complete analysis (exploration + insights)
+│   └── compiled.sql                  # Complete project SQL in one file 
 └── README.md                         # Project overview and instructions
+
 ```
 
 ## 🧾 Dataset Overview
