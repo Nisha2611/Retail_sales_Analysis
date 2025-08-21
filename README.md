@@ -126,6 +126,8 @@ Indexes created to optimize performance for common query patterns:
 
 ## 📌 Sample Queries (Highlights)
 
+---sql
+
 -- 🗓️ Which day of the week has the highest profit margin?
 SELECT TOP 1
     DATENAME(weekday, sales_date) AS sales_day,
