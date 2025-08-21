@@ -87,9 +87,9 @@ Indexes created to optimize performance for common query patterns:
 - 🚻 **Gender Distribution**: Breakdown by `gender`
 - 💳 **Avg. Spend by Gender**: `AVG(total_sale)` grouped by `gender`
   | gender | count_of_gender |
-|--------|-----------------|
-| Female | 1017            |
-| Male   | 980             |
+  |--------|-----------------|
+  | Female | 1017            |
+  | Male   | 980             |
 
 - 🎂 **Age Distribution**: Count by `age`
 - 💸 **Top Age Groups by Sales**: `SUM(total_sale)` grouped by `age`
