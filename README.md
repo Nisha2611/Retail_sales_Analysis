@@ -124,6 +124,7 @@ Indexes created to optimize performance for common query patterns:
 
 
 ## 📌 Sample Queries (Highlights)
+```sql
 
 -- 🗓️ Which day of the week has the highest profit margin?
 SELECT TOP 1 
@@ -170,6 +171,7 @@ WHERE cm.customer_total_sale > asm.customer_avg_sale
 AND cm.customer_profit_margin < apm.customer_avg_profit_margin
 ORDER BY cm.customer_total_sale DESC;
 
+---
 
 ## 🛠️ How to Use This Project
 
