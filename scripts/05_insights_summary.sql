@@ -1,119 +1,130 @@
 -- 05_insights_summary.sql
 -- Profitability & Strategy Insights
 
--- Which customer segments (by age and gender) have the highest profit margin (profit/revenue)?
-SELECT TOP 1 age, gender,
-       SUM(total_sale) AS total_sales,
-       SUM(cogs) AS total_cogs,
-       SUM(total_sale - cogs) AS total_profit,
-       (SUM(total_sale - cogs) * 100.0) / NULLIF(SUM(total_sale), 0) AS total_profit_margin
-FROM Retail_sales
-GROUP BY age, gender
-ORDER BY total_profit_margin DESC;
+--Which customer segments (by age and gender) have the highest profit margin (profit/revenue)?
+select top 1 age,gender,
+format(sum(total_sale),'c','en-in') as total_sales,
+format(sum(cogs),'c','en-in') as total_cogs,
+format(sum(total_sale - cogs),'c','en-in') as total_profit,
+format((sum(total_sale - cogs) *100.0)/nullif(sum(total_sale),0),'n2') +'%' as total_profit_margin
+from retail_sales
+group by age,gender
+order by total_profit_margin desc;
 
--- Are there product categories with high sales volume but below-average profit margins?
-WITH category_profit_margin AS (
-    SELECT category,
-           SUM(total_sale) AS total_sale,
-           SUM(cogs) AS total_cog,
-           SUM(total_sale - cogs) AS total_profit,
-           (SUM(total_sale - cogs) * 100.0) / NULLIF(SUM(total_sale), 0) AS total_profit_margin
-    FROM Retail_sales
-    GROUP BY category
+--Are there product categories with high sales volume but below-average profit margins?
+
+with category_profit_margin as (
+select category,
+sum(total_sale) as total_sale,
+sum(cogs) as total_cog,
+sum(total_sale - cogs) as total_profit,
+(sum(total_sale-cogs) * 100.0) / nullif (sum(total_sale),0) as total_profit_margin 
+from retail_sales
+group by category),
+average_profit_margin as (
+select  avg(total_profit_margin) as category_average_profit_margin
+from category_profit_margin
 ),
-average_profit_margin AS (
-    SELECT AVG(total_profit_margin) AS category_average_profit_margin FROM category_profit_margin
-),
-average_sales_margin AS (
-    SELECT AVG(total_sale) AS category_average_sale FROM category_profit_margin
+average_sales_margin as (
+select avg(total_sale) as category_average_sale
+from category_profit_margin
 )
-SELECT cpm.category,
-       cpm.total_sale,
-       cpm.total_profit_margin
-FROM category_profit_margin cpm
-CROSS JOIN average_profit_margin apm
-CROSS JOIN average_sales_margin asm
-WHERE cpm.total_profit_margin < apm.category_average_profit_margin
-  AND cpm.total_sale > asm.category_average_sale
-ORDER BY cpm.total_sale DESC;
 
--- Which hour of the day generates the highest profit (not just sales)?
-SELECT TOP 1 DATEPART(hour, sales_time) AS sale_hour,
-       SUM(total_sale - cogs) AS total_profit
-FROM Retail_sales
-GROUP BY DATEPART(hour, sales_time)
-ORDER BY total_profit DESC;
+select cpm.category,
+format(round(cpm.total_sale,2),'c','en-in') as Total_sale, 
+format(round(cpm.total_profit_margin,2),'n2')+'%' as total_profit_margin
+from category_profit_margin cpm
+cross join average_profit_margin apm
+cross join average_sales_margin asm 
+where cpm.total_profit_margin <  apm.category_average_profit_margin
+and cpm.total_sale >asm.category_average_sale
+order by cpm.total_sale desc 
 
--- Which day of the week has the highest profit margin?
-SELECT TOP 1 DATENAME(weekday, sales_date) AS sales_day,
-       (SUM(total_sale - cogs) * 100) / NULLIF(SUM(total_sale), 0) AS total_profit_margin
-FROM Retail_sales
-GROUP BY DATENAME(weekday, sales_date)
-ORDER BY total_profit_margin DESC;
+ --Which hour of the day generates the highest profit (not just sales)?
+ select top 1
+ datepart(hour , sales_time) as sale_hour,
+ format(sum(total_sale - cogs),'c','en-in') as total_profit
+ from retail_sales
+ group by datepart(hour , sales_time)
+ order by total_profit desc 
 
--- Which customers have high revenue but low profit margins?
-WITH customerwise_margin AS (
-    SELECT customer_id,
-           SUM(total_sale) AS customer_total_sale,
-           SUM(total_sale - cogs) AS customer_total_profit,
-           (SUM(total_sale - cogs) * 100.0) / NULLIF(SUM(total_sale), 0) AS customer_profit_margin
-    FROM Retail_sales
-    GROUP BY customer_id
+ --Which day of the week has the highest profit margin?
+ select top 1
+ datename(weekday,sales_date) as sales_day,
+ format((sum(total_sale - cogs)*100)/nullif(sum(total_sale),0),'n2') + '%' as total_profit_margin
+ from retail_sales
+ group by datename(weekday,sales_date)
+ order by total_profit_margin desc ;
+
+ --Which top 10 customers have high revenue but low profit margins?
+
+ with customerwise_margin as (
+ select customer_id,
+ sum(total_sale) as customer_total_sale,
+ sum(total_sale - cogs) as customer_total_profit,
+(sum(total_sale - cogs)*100.0)/nullif(sum(total_sale),0) as customer_profit_margin
+ from retail_sales
+ group by customer_id),
+ average_profit_margin as (
+ select avg(customer_profit_margin) as customer_average_profit_margin
+from customerwise_margin),
+average_sales as (
+select avg(customer_total_sale) as customer_average_sale 
+from customerwise_margin)
+
+select top 10
+cm.customer_id,
+Format(Round(cm.customer_total_sale,2),'c','en-in')as customer_total_sale,
+format(round(cm.customer_profit_margin,2),'N2') + ' %' as customer_profit_margin
+from customerwise_margin cm
+cross join average_profit_margin apm
+cross join average_sales avg_sale
+where cm.customer_total_sale > avg_sale.customer_average_sale
+and cm.customer_profit_margin < apm.customer_average_profit_margin
+order by cm.customer_total_sale desc 
+
+--What  top 5 category + customer segment combinations drive the most profit?
+select top 5 category,
+customer_id ,
+format(sum(total_sale - cogs),'c','en-in') as total_profit
+from retail_sales
+group by category,customer_id
+order by total_profit desc;
+
+
+--Based on the analysis, which top 10 customer segments (age or gender) and product categories should be prioritized for marketing and growth strategies?
+
+with segment_profit as (
+select age, gender,
+sum(total_sale) as total_sale,
+sum(total_sale - cogs) as total_profit,
+sum(total_sale - cogs) *100.0/nullif(sum(total_sale),0) as total_profit_margin
+from retail_sales
+group by age,gender
 ),
-average_profit_margin AS (
-    SELECT AVG(customer_profit_margin) AS customer_average_profit_margin FROM customerwise_margin
-),
-average_sales AS (
-    SELECT AVG(customer_total_sale) AS customer_average_sale FROM customerwise_margin
+category_profit as ( 
+select category,
+sum(total_sale) as category_total_sale,
+sum(total_sale - cogs) as category_total_profit,
+sum(total_sale - cogs) *100.0/nullif(sum(total_sale),0) as category_profit_margin
+from retail_sales
+group by category
 )
-SELECT cm.customer_id,
-       cm.customer_total_sale,
-       cm.customer_profit_margin
-FROM customerwise_margin cm
-CROSS JOIN average_profit_margin apm
-CROSS JOIN average_sales avg_sale
-WHERE cm.customer_total_sale > avg_sale.customer_average_sale
-  AND cm.customer_profit_margin < apm.customer_average_profit_margin
-ORDER BY cm.customer_total_sale DESC;
 
--- What category + customer segment combinations drive the most profit?
-SELECT category,
-       customer_id,
-       SUM(total_sale - cogs) AS total_profit
-FROM Retail_sales
-GROUP BY category, customer_id
-ORDER BY total_profit DESC;
+select top 10 
+sp.gender,
+sp.age,
+format(sp.total_sale,'c','en-in') as total_sale,
+format(sp.total_profit,'c','en-in') as total_profit,
+format(sp.total_profit_margin,'n2') +'%' as total_profit_margin,
+cp.category,
+format(cp.category_total_sale,'c','en-in') as category_total_sale,
+format(cp. category_total_profit,'c','en-in') as category_total_sale,
+format(cp.category_profit_margin,'n2') + '%' as category_profit_margin
+from segment_profit sp
+cross join category_profit as cp 
+where sp.total_profit > (select avg(total_profit) from segment_profit)
+and cp.category_total_profit > (select avg(category_total_profit) from category_profit)
+order by sp.total_profit desc, cp.category_total_profit desc 
 
--- Based on the analysis, which customer segments (age or gender) and product categories should be prioritized for marketing and growth strategies?
-WITH segment_profit AS (
-    SELECT age, gender,
-           SUM(total_sale) AS total_sale,
-           SUM(total_sale - cogs) AS total_profit,
-           SUM(total_sale - cogs) * 100.0 / NULLIF(SUM(total_sale), 0) AS total_profit_margin
-    FROM Retail_sales
-    GROUP BY age, gender
-),
-category_profit AS (
-    SELECT category,
-           SUM(total_sale) AS category_total_sale,
-           SUM(total_sale - cogs) AS category_total_profit,
-           SUM(total_sale - cogs) * 100.0 / NULLIF(SUM(total_sale), 0) AS category_profit_margin
-    FROM Retail_sales
-    GROUP BY category
-)
-SELECT sp.gender,
-       sp.age,
-       sp.total_sale,
-       sp.total_profit,
-       sp.total_profit_margin,
-       cp.category,
-       cp.category_total_sale,
-       cp.category_total_profit,
-       cp.category_profit_margin
-FROM segment_profit sp
-CROSS JOIN category_profit cp
-WHERE sp.total_profit > (SELECT AVG(total_profit) FROM segment_profit)
-  AND cp.category_total_profit > (SELECT AVG(category_total_profit) FROM category_profit)
-ORDER BY sp.total_profit DESC, cp.category_total_profit DESC;
-
--- End of Project
+--End of project 
