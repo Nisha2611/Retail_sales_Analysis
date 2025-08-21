@@ -72,52 +72,56 @@ Indexes created to optimize performance for common query patterns:
 ## 📊 Analytical Insights
 
 ### 🧾 General Sales Overview
-- ✅ **Total Transactions**: 2,000  
-- ✅ **Total Revenue**: Aggregated from `total_sale`  
-- ✅ **Total Profit**: `total_sale - cogs`  
-- ✅ **Average Sales/Transaction** and **Quantity/Transaction**
+
+- ✅ **Total Transactions**: `COUNT(total_sale)` confirms 2,000 sales
+- 💵 **Total Revenue**: `SUM(total_sale)`
+- 💰 **Total Profit**: `SUM(total_sale - cogs)`
+- 📊 **Average Sales/Transaction**: `AVG(total_sale)`
+- 📦 **Average Quantity/Transaction**: `AVG(quantity)`
 
 ---
 
 ### 👤 Customer Analysis
 
-- 👥 **Unique Customers**: Count of distinct `customer_id`
-- 🧑‍🤝‍🧑 **Gender Breakdown**: Male vs. Female
-- 📊 **Spending Trends by Gender**
-- 🎂 **Age Distribution** and **Top Age Groups by Spending**
-- 💰 **Top 5 Customers by Revenue**
-- ⚠️ **High-spending but low-margin customers**
+- 👥 **Unique Customers**: `COUNT(DISTINCT customer_id)`
+- 🚻 **Gender Distribution**: Breakdown by `gender`
+- 💳 **Avg. Spend by Gender**: `AVG(total_sale)` grouped by `gender`
+- 🎂 **Age Distribution**: Count by `age`
+- 💸 **Top Age Groups by Sales**: `SUM(total_sale)` grouped by `age`
+- 🏅 **Top 5 Customers by Revenue**: `SUM(total_sale)` by `customer_id`
+- ⚠️ **High-Spending, Low-Margin Customers**: High `total_sale` with below-average `profit margin`
 
 ---
 
 ### 📦 Product & Category Analysis
 
-- 🔢 Unique product categories
-- 🏆 Best-selling category by **quantity**
-- 💸 Highest **revenue-generating** category
-- 📈 **Average price per unit** by category
-- 💹 **Profit margins** across categories
-- 🚨 Categories with **high sales but low profit margin**
+- 🔢 **Unique Categories**: `COUNT(DISTINCT category)`
+- 🏆 **Best-Selling Category (Quantity)**: `SUM(quantity)` grouped by `category`
+- 💸 **Top Revenue-Generating Category**: Ranked `SUM(total_sale)` by category
+- 📈 **Avg. Price per Unit by Category**: `AVG(price_per_unit)`
+- 💹 **Highest Profit Margin by Category**: Category with max `profit margin`
+- 🚨 **High Sales, Low Margin Categories**: Above-average sales but below-average profit margins
 
 ---
 
 ### 🕒 Time-Based Trends
 
-- 📅 Monthly sales & profitability trends
-- 📈 Busiest **days of the week** and **hours of the day**
-- 🕐 Most profitable hour of the day
-- 🗓️ Days with highest profit margin
+- 🗓️ **Monthly Sales & Profit Trends**: Grouped by `FORMAT(sales_date, 'yyyy-MM')`
+- 📆 **Top Weekday by Sales**: `FORMAT(sales_date, 'dddd')` with highest `SUM(total_sale)`
+- ⏰ **Busiest Sales Hours**: `DATEPART(hour, sales_time)` with most sales
+- 💸 **Most Profitable Hour**: Hour with highest `SUM(total_sale - cogs)`
+- 📈 **Top Day by Profit Margin**: Day with max `(total_sale - cogs)/total_sale`
 
 ---
 
 ### 📈 Strategic Business Insights
 
-- 👥 Most profitable **age + gender** segments
-- 🛍️ Category + segment combinations that drive highest profit
-- 🎯 Customer groups to **prioritize** for future marketing
-- 📉 Segments with **below-average margins** despite high revenue
+- 🧑‍🤝‍🧑 **Most Profitable Segments (Age + Gender)**: Segment with max `profit margin`
+- 🛍️ **Profitable Category + Segment Combos**: High combined `total_profit`
+- 🎯 **Customer Segments to Prioritize**: Above-average `total_profit` segments
+- 📉 **Low-Margin, High-Revenue Segments**: Identified via category + segment filtering
 
----
+
 
 ## 📌 Sample Queries (Highlights)
 
