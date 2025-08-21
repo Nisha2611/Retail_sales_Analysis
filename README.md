@@ -6,6 +6,9 @@ This project demonstrates a complete end-to-end data analysis workflow using **S
 
 ---
 
+## 📁 Project Structure
+
+```
 Retail-Sales-Analysis/
 ├── data/
 │   └── retail_sales.csv              # Raw dataset (2,000 rows of retail transactions)
@@ -16,8 +19,8 @@ Retail-Sales-Analysis/
 │   ├── 04_data_exploration.sql       # Exploratory & business queries
 │   ├── 05_insights_summary.sql       # Strategic business insights
 │   └── 06_full_analysis.sql          # Complete analysis (exploration + insights)
-├── README.md                         # Project overview and instructions
-
+└── README.md                         # Project overview and instructions
+```
 
 ## 🧾 Dataset Overview
 
