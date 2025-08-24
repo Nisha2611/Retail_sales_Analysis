@@ -397,7 +397,7 @@ Adjust stock and promotions based on monthly sales and profit trends to capitali
 > **Nisha2611**  
 > Aspiring Data Analyst | Passionate about SQL & Data Cleaning  
 > 
-> 🔗 [LinkedIn](https://www.linkedin.com/in/nisha-khatoon-a866b633b)  
+> 🔗 [LinkedIn](https://www.linkedin.com/in/nisha-khatoon)  
 > 🔗 [GitHub](https://github.com/Nisha2611)
 
 **💬 Feedback**
